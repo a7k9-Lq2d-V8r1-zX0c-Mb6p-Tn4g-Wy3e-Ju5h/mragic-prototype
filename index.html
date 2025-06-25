@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Untitled Document - Google Docs</title>
+<link rel="icon" href="favicon.ico" type="image/x-icon" />
+<style>
+  html, body {
+    margin: 0; padding: 0; height: 100%; overflow: hidden;
+    background: white;
+  }
+  #white-screen {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: white;
+    z-index: 10;
+  }
+  iframe {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100vw;
+    height: 100vh;
+    border: none;
+    display: none;
+  }
+  #embed1 {
+    z-index: 1;
+  }
+  #embed2 {
+    z-index: 2;
+  }
+  .visible {
+    display: block !important;
+  }
+</style>
+</head>
+<body>
+
+<div id="white-screen"></div>
+
+<iframe id="embed1" src="https://mragic.github.io"></iframe>
+<iframe id="embed2" src="https://example.org"></iframe>
+
+<script>
+  const whiteScreen = document.getElementById('white-screen');
+  const embed1 = document.getElementById('embed1');
+  const embed2 = document.getElementById('embed2');
+  let unlocked = false;
+
+  document.addEventListener('keydown', e => {
+    if (!unlocked) {
+      if (e.ctrlKey && e.shiftKey && e.key.toLowerCase() === 'x') {
+        unlocked = true;
+        whiteScreen.style.display = 'none';
+        embed1.classList.add('visible');
+      }
+    } else {
+      if (e.key === '=') {
+        embed1.classList.toggle('visible');
+      } else if (e.key === '-') {
+        embed2.classList.toggle('visible');
+      }
+    }
+  });
+</script>
+
+</body>
+</html>
